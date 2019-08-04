@@ -1,0 +1,21 @@
+<div>
+  <table class="table table-striped table-hover">
+      <thead>
+          <tr>
+              <th scope="col">#</th>
+              <th scope="col">Smjer</th>
+
+
+          </tr>
+      </thead>
+      <tbody>
+          <tr *ngFor="let division of divisions; let i = index">
+              <th scope="row">{{i+1}}</th>
+              <td>{{ division.name }}</td>
+
+
+
+          </tr>
+      </tbody>
+  </table>
+</div>
