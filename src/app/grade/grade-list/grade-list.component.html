@@ -2,17 +2,30 @@
   <table class="table table-striped table-hover">
       <thead>
           <tr>
-              <th scope="col">#</th>
               <th scope="col">Vrijeme Ispita</th>
               <th scope="col">Ocjena</th>
+              <th scope="col">Ime</th>
+              <th scope="col">Prezime</th>
+              <th scope="col">Predmet</th>
+              <th scope="col" rowspan="2">ADD</th>
 
           </tr>
       </thead>
       <tbody>
-          <tr *ngFor="let grade of grades; let i = index">
-              <th scope="row">{{i+1}}</th>
+          <tr *ngFor="let grade of grades">
               <td>{{ grade.examTime }}</td>
               <td>{{ grade.evaluation }}</td>
+              <td>{{ grade.student.firstName}}</td>
+              <td>{{ grade.student.lastName}}</td>
+              <td>{{ grade.course.name}}</td>
+
+              <td>
+                <button class="btn"><i class="fa fa-edit"></i></button>
+            </td>
+            <td>
+                <button class="btn delete"><i class="fa fa-trash"></i></button>
+            </td>
+
 
 
           </tr>
