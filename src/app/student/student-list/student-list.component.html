@@ -19,11 +19,11 @@
               <td> <input type="checkbox"> </td>
 
               <td>
-                <button class="btn"><i class="fa fa-edit"></i></button>
-            </td>
-            <td>
-                <button class="btn delete"><i class="fa fa-trash"></i></button>
-            </td>
+                    <button class="btn"><i class="fa fa-edit" (click)="onEdit(student.id)"></i></button>
+                </td>
+                <td>
+                    <button class="btn delete" (click)="onDelete(student.id)"><i class="fa fa-trash"></i></button>
+                </td>
 
           </tr>
       </tbody>

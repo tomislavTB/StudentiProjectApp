@@ -16,4 +16,14 @@ export class StudentService {
   public getAll() {
     return this.http.get(environment.apiUrl + this.STUDENT_URL);
   }
+
+
+  public deleteOne(studentId) {
+    return this.http.delete(environment.apiUrl + this.STUDENT_URL + '/' + studentId);
+  }
+
+
+  public getOne(studentId) {
+    return this.http.get(environment.apiUrl + this.STUDENT_URL + '/' + studentId);
+  }
 }

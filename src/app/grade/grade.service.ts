@@ -16,4 +16,15 @@ export class GradeService {
   public getAll() {
     return this.http.get(environment.apiUrl + this.GRADE_URL);
   }
+
+
+  public deleteOne(gradeId) {
+    return this.http.delete(environment.apiUrl + this.GRADE_URL + '/' + gradeId);
+  }
+
+
+  public getOne(gradeId) {
+    return this.http.get(environment.apiUrl + this.GRADE_URL + '/' + gradeId);
+  }
 }
+

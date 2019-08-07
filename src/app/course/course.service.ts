@@ -16,4 +16,14 @@ export class CourseService {
   public getAll() {
     return this.http.get(environment.apiUrl + this.COURS_URL);
   }
+
+  public deleteOne(courseId) {
+    return this.http.delete(environment.apiUrl + this.COURS_URL + '/' + courseId);
+  }
+
+
+  public getOne(courseId) {
+    return this.http.get(environment.apiUrl + this.COURS_URL + '/' + courseId);
+  }
 }
+

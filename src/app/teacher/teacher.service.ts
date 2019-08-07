@@ -16,5 +16,16 @@ export class TeacherService {
   public getAll() {
     return this.http.get(environment.apiUrl + this.TEACHER_URL);
   }
+
+
+  public deleteOne(teacherId) {
+    return this.http.delete(environment.apiUrl + this.TEACHER_URL + '/' + teacherId);
+  }
+
+
+  public getOne(teacherId) {
+    return this.http.get(environment.apiUrl + this.TEACHER_URL + '/' + teacherId);
+  }
 }
+
 

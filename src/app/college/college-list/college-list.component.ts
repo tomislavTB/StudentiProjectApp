@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CollegeService } from '../college.service';
+import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-college-list',
@@ -8,7 +10,7 @@ import { CollegeService } from '../college.service';
 })
 export class CollegeListComponent implements OnInit {
 
-  constructor(private collegeService: CollegeService
+  constructor(private collegeService: CollegeService, private toastr: ToastrService, private router: Router
     ) { }
 
     private colleges = [];
@@ -19,4 +21,21 @@ export class CollegeListComponent implements OnInit {
     });
   }
 
+  onDelete(collegeId) {
+    if (confirm('Da li ste sigurni?')) {
+      this.collegeService.deleteOne(collegeId).subscribe(result => {
+        this.collegeService.getAll();
+        this.toastr.success('Izbrisali ste fakultet.');
+   });
+ }
 }
+
+onAdd() {
+   this.router.navigate(['college/new']);
+}
+
+onEdit(collegeId) {
+  this.router.navigate(['college', collegeId]);
+}
+}
+

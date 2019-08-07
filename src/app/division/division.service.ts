@@ -16,4 +16,13 @@ export class DivisionService {
   public getAll() {
     return this.http.get(environment.apiUrl + this.DIVISION_URL);
   }
+
+  public deleteOne(divisionId) {
+    return this.http.delete(environment.apiUrl + this.DIVISION_URL + '/' + divisionId);
+  }
+
+
+  public getOne(divisionId) {
+    return this.http.get(environment.apiUrl + this.DIVISION_URL + '/' + divisionId);
+  }
 }

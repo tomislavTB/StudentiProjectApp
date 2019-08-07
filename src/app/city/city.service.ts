@@ -16,4 +16,15 @@ export class CityService {
   public getAll() {
     return this.http.get(environment.apiUrl + this.CITIES_URL);
   }
+
+
+  public deleteOne(cityId) {
+    return this.http.delete(environment.apiUrl + this.CITIES_URL + '/' + cityId);
+  }
+
+
+  public getOne(cityId) {
+    return this.http.get(environment.apiUrl + this.CITIES_URL + '/' + cityId);
+  }
 }
+

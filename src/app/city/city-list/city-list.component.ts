@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { CityService } from '../city.service';
 
 @Component({
@@ -7,9 +9,10 @@ import { CityService } from '../city.service';
   styleUrls: ['./city-list.component.scss']
 })
 export class CityListComponent implements OnInit {
-  constructor(
-    private cityService: CityService
-  ) { }
+
+
+  constructor(private cityService: CityService, private toastr: ToastrService, private router: Router
+    ) { }
 
   private cities = [];
 
@@ -19,17 +22,20 @@ export class CityListComponent implements OnInit {
     });
   }
 
-  public getReport() {
-    // var podaci = format.getData();
-    // this.cityService.addCity(podaci).subscribe(response => {
-    //   if(response.status === 201) {
+  onDelete(cityId) {
+    if (confirm('Da li ste sigurni?')) {
+      this.cityService.deleteOne(cityId).subscribe(result => {
+        this.cityService.getAll();
+        this.toastr.success('Izbrisali ste grad.');
+   });
+ }
+}
 
-    //   } else {
-    //     alert("dogodila se pogreska na backendu javite se administratoru..")
-    //   }
-    // })
-    alert("gumb stisnut")
-    return false
-  }
+onAdd() {
+   this.router.navigate(['city/new']);
+}
 
+onEdit(cityId) {
+  this.router.navigate(['city', cityId]);
+}
 }

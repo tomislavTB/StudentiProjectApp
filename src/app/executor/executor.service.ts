@@ -16,4 +16,13 @@ export class ExecutorService {
   public getAll() {
     return this.http.get(environment.apiUrl + this.EXECUTOR_URL);
   }
+
+  public deleteOne(executorId) {
+    return this.http.delete(environment.apiUrl + this.EXECUTOR_URL + '/' + executorId);
+  }
+
+
+  public getOne(executorId) {
+    return this.http.get(environment.apiUrl + this.EXECUTOR_URL + '/' + executorId);
+  }
 }

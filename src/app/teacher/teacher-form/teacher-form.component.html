@@ -1,0 +1,12 @@
+<div ng-app="myApp" ng-controller="formCtrl">
+  <form novalidate>
+    Ime:<br>
+    <input type="text" ng-model="teacher.firstName"><br>
+    Prezime:<br>
+    <input type="text" ng-model="teacher.lastName"><br>
+    Adresa:<br>
+    <input type="text" ng-model="teacher.address">
+    <br><br>
+    <button ng-click="reset()">RESET</button>
+  </form>
+</div>

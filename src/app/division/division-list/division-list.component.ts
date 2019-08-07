@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DivisionService } from '../division.service';
+import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-division-list',
@@ -8,7 +10,7 @@ import { DivisionService } from '../division.service';
 })
 export class DivisionListComponent implements OnInit {
 
-  constructor(private divisionService: DivisionService
+  constructor(private divisionService: DivisionService, private toastr: ToastrService, private router: Router
     ) { }
 
     private divisions = [];
@@ -19,4 +21,21 @@ export class DivisionListComponent implements OnInit {
     });
   }
 
+
+  onDelete(divisionId) {
+    if (confirm('Da li ste sigurni?')) {
+      this.divisionService.deleteOne(divisionId).subscribe(result => {
+        this.divisionService.getAll();
+        this.toastr.success('Izbrisali ste smjer.');
+   });
+ }
+}
+
+onAdd() {
+   this.router.navigate(['division/new']);
+}
+
+onEdit(divisionId) {
+  this.router.navigate(['division', divisionId]);
+}
 }

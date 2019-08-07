@@ -2,7 +2,6 @@
   <table class="table table-striped table-hover">
       <thead>
           <tr>
-              <th scope="col">#</th>
               <th scope="col">Opis predavanja</th>
 
 
@@ -10,8 +9,15 @@
       </thead>
       <tbody>
           <tr *ngFor="let executor of executors; let i = index">
-              <th scope="row">{{i+1}}</th>
               <td>{{ executor.description }}</td>
+
+
+              <td>
+                <button class="btn"><i class="fa fa-edit" (click)="onEdit(executor.id)"></i></button>
+            </td>
+            <td>
+                <button class="btn delete" (click)="onDelete(executor.id)"><i class="fa fa-trash"></i></button>
+            </td>
 
 
 

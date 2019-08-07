@@ -14,6 +14,8 @@ import { CollegeModule } from './college/college.module';
 import { CountryModule } from './country/country.module';
 import { HttpClientModule } from '@angular/common/http';
 import { HomeModule } from './home/home.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -32,7 +34,9 @@ import { HomeModule } from './home/home.module';
     TeacherModule,
     CityModule,
     HomeModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot()
 
   ],
   providers: [],

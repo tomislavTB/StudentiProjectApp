@@ -16,4 +16,14 @@ export class CountryService {
   public getAll() {
     return this.http.get(environment.apiUrl + this.COUNTRY_URL);
   }
+
+
+  public deleteOne(countryId) {
+    return this.http.delete(environment.apiUrl + this.COUNTRY_URL + '/' + countryId);
+  }
+
+
+  public getOne(countryId) {
+    return this.http.get(environment.apiUrl + this.COUNTRY_URL + '/' + countryId);
+  }
 }

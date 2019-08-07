@@ -16,4 +16,14 @@ export class CollegeService {
   public getAll() {
     return this.http.get(environment.apiUrl + this.COLLEGE_URL);
   }
+
+
+  public deleteOne(collegeId) {
+    return this.http.delete(environment.apiUrl + this.COLLEGE_URL + '/' + collegeId);
+  }
+
+
+  public getOne(collegeId) {
+    return this.http.get(environment.apiUrl + this.COLLEGE_URL + '/' + collegeId);
+  }
 }

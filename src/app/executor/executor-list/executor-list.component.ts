@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ExecutorService } from '../executor.service';
+import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-executor-list',
@@ -8,9 +10,9 @@ import { ExecutorService } from '../executor.service';
 })
 export class ExecutorListComponent implements OnInit {
 
-  constructor(private executorService: ExecutorService
-    ) { }
 
+  constructor(private executorService: ExecutorService, private toastr: ToastrService, private router: Router
+    ) { }
     private executors = [];
 
     ngOnInit() {
@@ -19,5 +21,22 @@ export class ExecutorListComponent implements OnInit {
     });
   }
 
+
+  onDelete(executorId) {
+    if (confirm('Da li ste sigurni?')) {
+      this.executorService.deleteOne(executorId).subscribe(result => {
+        this.executorService.getAll();
+        this.toastr.success('Izbrisali ste izvršitelja.');
+   });
+ }
+}
+
+onAdd() {
+   this.router.navigate(['executor/new']);
+}
+
+onEdit(executorId) {
+  this.router.navigate(['executor', executorId]);
+}
 }
 
