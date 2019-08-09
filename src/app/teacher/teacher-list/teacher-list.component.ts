@@ -34,11 +34,11 @@ export class TeacherListComponent implements OnInit {
 }
 
 onAdd() {
-   this.router.navigate(['teacher/new']);
+   this.router.navigate(['teachers/new']);
 }
 
 onEdit(teacherId) {
-  this.router.navigate(['teacher', teacherId]);
+  this.router.navigate(['teachers', teacherId]);
 }
 }
 

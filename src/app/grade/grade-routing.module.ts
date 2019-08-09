@@ -5,9 +5,9 @@ import { GradeFormComponent } from './grade-form/grade-form.component';
 
 
 const routes: Routes = [
-  { path: 'grade', component: GradeListComponent },
-  { path: 'grade/new', component: GradeFormComponent },
-  { path: 'grade/:id', component: GradeFormComponent }
+  { path: 'grades', component: GradeListComponent },
+  { path: 'grades/new', component: GradeFormComponent },
+  { path: 'grades/:id', component: GradeFormComponent }
 ];
 
 @NgModule({

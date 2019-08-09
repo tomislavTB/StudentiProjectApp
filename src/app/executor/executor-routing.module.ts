@@ -5,9 +5,9 @@ import { ExecutorFormComponent } from './executor-form/executor-form.component';
 
 
 const routes: Routes = [
-  { path: 'executor', component: ExecutorListComponent },
-  { path: 'executor/new', component: ExecutorFormComponent },
-  { path: 'executor/:id', component: ExecutorFormComponent }
+  { path: 'executors', component: ExecutorListComponent },
+  { path: 'executors/new', component: ExecutorFormComponent },
+  { path: 'executors/:id', component: ExecutorFormComponent }
 ];
 
 @NgModule({

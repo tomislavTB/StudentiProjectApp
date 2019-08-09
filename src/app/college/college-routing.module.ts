@@ -5,9 +5,9 @@ import { CollegeFormComponent } from './college-form/college-form.component';
 
 
 const routes: Routes = [
-  { path: 'college', component: CollegeListComponent },
-  { path: 'college/new', component: CollegeFormComponent },
-  { path: 'college/:id', component: CollegeFormComponent }
+  { path: 'colleges', component: CollegeListComponent },
+  { path: 'colleges/new', component: CollegeFormComponent },
+  { path: 'colleges/:id', component: CollegeFormComponent }
 ];
 
 @NgModule({

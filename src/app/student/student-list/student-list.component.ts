@@ -32,10 +32,10 @@ export class StudentListComponent implements OnInit {
  }
 
   onAdd() {
-     this.router.navigate(['studnet/new']);
+     this.router.navigate(['studnets/new']);
  }
 
   onEdit(studentId) {
-    this.router.navigate(['student', studentId]);
+    this.router.navigate(['students', studentId]);
  }
 }

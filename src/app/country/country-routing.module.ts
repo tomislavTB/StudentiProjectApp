@@ -5,9 +5,9 @@ import { CountryFormComponent } from './country-form/country-form.component';
 
 
 const routes: Routes = [
-  { path: 'country', component: CountryListComponent },
-  { path: 'country/new', component: CountryFormComponent },
-  { path: 'country/:id', component: CountryFormComponent }
+  { path: 'countries', component: CountryListComponent },
+  { path: 'countries/new', component: CountryFormComponent },
+  { path: 'countries/:id', component: CountryFormComponent }
 ];
 
 @NgModule({

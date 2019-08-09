@@ -5,9 +5,9 @@ import { TeacherFormComponent } from './teacher-form/teacher-form.component';
 
 
 const routes: Routes = [
-  { path: 'teacher', component: TeacherListComponent },
-  { path: 'teacher/new', component: TeacherFormComponent },
-  { path: 'teacher/:id', component: TeacherFormComponent }
+  { path: 'teachers', component: TeacherListComponent },
+  { path: 'teachers/new', component: TeacherFormComponent },
+  { path: 'teachers/:id', component: TeacherFormComponent }
 ];
 
 @NgModule({

@@ -31,10 +31,10 @@ export class CourseListComponent implements OnInit {
 }
 
 onAdd() {
-   this.router.navigate(['course/new']);
+   this.router.navigate(['courses/new']);
 }
 
 onEdit(courseId) {
-  this.router.navigate(['course', courseId]);
+  this.router.navigate(['courses', courseId]);
 }
 }

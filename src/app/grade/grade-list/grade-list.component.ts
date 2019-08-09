@@ -30,11 +30,11 @@ export class GradeListComponent implements OnInit {
 }
 
 onAdd() {
-   this.router.navigate(['grade/new']);
+   this.router.navigate(['grades/new']);
 }
 
 onEdit(gradeId) {
-  this.router.navigate(['grade', gradeId]);
+  this.router.navigate(['grades', gradeId]);
 }
 }
 

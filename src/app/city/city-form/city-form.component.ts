@@ -53,7 +53,6 @@ export class CityFormComponent implements OnInit {
         const firstError = response.error.errors;
         const firstKey = Object.keys(firstError)[0];
         this.errorMessage = firstError[firstKey][0];
-        this.form.hide();
       });
   }
 }

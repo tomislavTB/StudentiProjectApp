@@ -31,11 +31,11 @@ export class CollegeListComponent implements OnInit {
 }
 
 onAdd() {
-   this.router.navigate(['college/new']);
+   this.router.navigate(['colleges/new']);
 }
 
 onEdit(collegeId) {
-  this.router.navigate(['college', collegeId]);
+  this.router.navigate(['colleges', collegeId]);
 }
 }
 

@@ -32,10 +32,10 @@ export class DivisionListComponent implements OnInit {
 }
 
 onAdd() {
-   this.router.navigate(['division/new']);
+   this.router.navigate(['divisions/new']);
 }
 
 onEdit(divisionId) {
-  this.router.navigate(['division', divisionId]);
+  this.router.navigate(['divisions', divisionId]);
 }
 }

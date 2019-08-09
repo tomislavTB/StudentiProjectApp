@@ -32,11 +32,11 @@ export class ExecutorListComponent implements OnInit {
 }
 
 onAdd() {
-   this.router.navigate(['executor/new']);
+   this.router.navigate(['executors/new']);
 }
 
 onEdit(executorId) {
-  this.router.navigate(['executor', executorId]);
+  this.router.navigate(['executors', executorId]);
 }
 }
 

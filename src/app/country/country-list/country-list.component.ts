@@ -33,11 +33,11 @@ export class CountryListComponent implements OnInit {
 }
 
 onAdd() {
-   this.router.navigate(['country/new']);
+   this.router.navigate(['countries/new']);
 }
 
 onEdit(countryId) {
-  this.router.navigate(['country', countryId]);
+  this.router.navigate(['countries', countryId]);
 }
 }
 

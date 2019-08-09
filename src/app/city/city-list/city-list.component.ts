@@ -37,7 +37,7 @@ onAdd() {
 }
 
 onEdit(cityId) {
-  this.router.navigate(['cities', cityId]);
   this.form.show();
+  this.router.navigate(['cities', cityId]);
 }
 }

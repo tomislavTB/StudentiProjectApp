@@ -5,9 +5,9 @@ import { DivisionFormComponent } from './division-form/division-form.component';
 
 
 const routes: Routes = [
-  { path: 'division', component: DivisionListComponent },
-  { path: 'division/new', component: DivisionFormComponent },
-  { path: 'division/:id', component: DivisionFormComponent }
+  { path: 'divisions', component: DivisionListComponent },
+  { path: 'divisions/new', component: DivisionFormComponent },
+  { path: 'divisions/:id', component: DivisionFormComponent }
 ];
 
 @NgModule({
