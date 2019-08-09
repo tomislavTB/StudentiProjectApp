@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { CityService } from '../city.service';
+import { FormService } from 'src/app/shared/form.service';
 
 @Component({
   selector: 'app-city-list',
@@ -11,7 +12,7 @@ import { CityService } from '../city.service';
 export class CityListComponent implements OnInit {
 
 
-  constructor(private cityService: CityService, private toastr: ToastrService, private router: Router
+  constructor(private cityService: CityService, private toastr: ToastrService, private router: Router, private form: FormService
     ) { }
 
   private cities = [];
@@ -32,10 +33,11 @@ export class CityListComponent implements OnInit {
 }
 
 onAdd() {
-   this.router.navigate(['city/new']);
+   this.router.navigate(['cities/new']);
 }
 
 onEdit(cityId) {
-  this.router.navigate(['city', cityId]);
+  this.router.navigate(['cities', cityId]);
+  this.form.show();
 }
 }

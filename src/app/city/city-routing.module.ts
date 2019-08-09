@@ -5,9 +5,9 @@ import { CityFormComponent } from './city-form/city-form.component';
 
 
 const routes: Routes = [
-  { path: 'city', component: CityListComponent },
-  { path: 'city/new', component: CityFormComponent },
-  { path: 'city/:id', component: CityFormComponent }
+  { path: 'cities', component: CityListComponent },
+  { path: 'cities/new', component: CityFormComponent },
+  { path: 'cities/:id', component: CityFormComponent }
 ];
 
 @NgModule({
