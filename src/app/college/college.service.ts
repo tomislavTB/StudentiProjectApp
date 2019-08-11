@@ -13,6 +13,16 @@ export class CollegeService {
 
   private readonly COLLEGE_URL = 'colleges';
 
+
+  private getRootUrl() {
+    return environment.apiUrl + this.COLLEGE_URL;
+  }
+
+  private formatUrl(collegeId){
+    return this.getRootUrl() + '/' + collegeId;
+  }
+
+
   public getAll() {
     return this.http.get(environment.apiUrl + this.COLLEGE_URL);
   }
@@ -26,4 +36,22 @@ export class CollegeService {
   public getOne(collegeId) {
     return this.http.get(environment.apiUrl + this.COLLEGE_URL + '/' + collegeId);
   }
+
+
+  public addOne(college) {
+    return this.http.post(this.getRootUrl(), college);
+  }
+
+  public putOne(collegeId, college) {
+    return this.http.put(this.formatUrl(collegeId), college);
+  }
+
+
+  public submit(college) {
+     if(!college.id) {
+      return this.addOne(college);
+    }
+      return this.putOne(college.id, college);
+  }
 }
+

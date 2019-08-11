@@ -13,6 +13,15 @@ export class GradeService {
 
   private readonly GRADE_URL = 'grades';
 
+  private getRootUrl() {
+    return environment.apiUrl + this.GRADE_URL;
+  }
+
+  private formatUrl(gradeId){
+    return this.getRootUrl() + '/' + gradeId;
+  }
+
+
   public getAll() {
     return this.http.get(environment.apiUrl + this.GRADE_URL);
   }
@@ -25,6 +34,21 @@ export class GradeService {
 
   public getOne(gradeId) {
     return this.http.get(environment.apiUrl + this.GRADE_URL + '/' + gradeId);
+  }
+  public addOne(grade) {
+    return this.http.post(this.getRootUrl(), grade);
+  }
+
+  public putOne(gradeId, grade) {
+    return this.http.put(this.formatUrl(gradeId), grade);
+  }
+
+
+  public submit(grade) {
+     if(!grade.id) {
+      return this.addOne(grade);
+    }
+      return this.putOne(grade.id, grade);
   }
 }
 

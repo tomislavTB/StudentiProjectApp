@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CountryService } from '../country.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
+import { FormService } from 'src/app/shared/form.service';
 
 @Component({
   selector: 'app-country-list',
@@ -10,7 +11,7 @@ import { Router } from '@angular/router';
 })
 export class CountryListComponent implements OnInit {
 
-  constructor(private countryService: CountryService, private toastr: ToastrService, private router: Router
+  constructor(private countryService: CountryService, private toastr: ToastrService, private router: Router, private form: FormService
     ) { }
 
     private countries = [];
@@ -37,6 +38,7 @@ onAdd() {
 }
 
 onEdit(countryId) {
+  this.form.show();
   this.router.navigate(['countries', countryId]);
 }
 }

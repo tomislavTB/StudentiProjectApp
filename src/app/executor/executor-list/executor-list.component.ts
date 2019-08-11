@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ExecutorService } from '../executor.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
+import { FormService } from 'src/app/shared/form.service';
 
 @Component({
   selector: 'app-executor-list',
@@ -11,7 +12,7 @@ import { Router } from '@angular/router';
 export class ExecutorListComponent implements OnInit {
 
 
-  constructor(private executorService: ExecutorService, private toastr: ToastrService, private router: Router
+  constructor(private executorService: ExecutorService, private toastr: ToastrService, private router: Router, private form: FormService
     ) { }
     private executors = [];
 
@@ -36,6 +37,7 @@ onAdd() {
 }
 
 onEdit(executorId) {
+  this.form.show();
   this.router.navigate(['executors', executorId]);
 }
 }

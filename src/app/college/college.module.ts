@@ -5,6 +5,7 @@ import { CollegeRoutingModule } from './college-routing.module';
 import { CollegeListComponent } from './college-list/college-list.component';
 import { CollegeFormComponent } from './college-form/college-form.component';
 import { FormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 @NgModule({
@@ -12,7 +13,8 @@ import { FormsModule } from '@angular/forms';
   imports: [
     CommonModule,
     CollegeRoutingModule,
-    FormsModule
+    FormsModule,
+    BrowserAnimationsModule
   ]
 })
 export class CollegeModule { }

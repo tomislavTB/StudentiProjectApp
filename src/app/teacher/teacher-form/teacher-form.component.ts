@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { StudentService } from 'src/app/student/student.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { FormService } from 'src/app/shared/form.service';
+import { CityService } from 'src/app/city/city.service';
+import { TeacherService } from '../teacher.service';
 
 @Component({
   selector: 'app-teacher-form',
@@ -11,14 +14,22 @@ export class TeacherFormComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private teacherService: StudentService
+    private teacherService: TeacherService,
+    private router: Router,
+    private toastr: ToastrService,
+    private form: FormService,
+    private cityService: CityService
   ) { }
 
-  public teacher : any = {};
+  public teacher: any = {};
+  public errorMessage = '';
+  public selectedCityId: any = {};
+  public cities: any = {};
 
   ngOnInit() {
     this.route.params.subscribe(params => {
-      const teacherId = params['id'];
+      const teacherId = params.id;
+      this.getCities();
       if(teacherId != null) {
         this.getTeacher(teacherId);
       }
@@ -30,8 +41,33 @@ export class TeacherFormComponent implements OnInit {
         {
           this.teacher = response;
           this.teacher.id = teacherId;
+          this.selectedCityId = this.teacher.cityId;
+          this.form.hide();
         }
       );
+  }
+
+  onSubmit() {
+    this.form.show();
+    this.selectedCityId = this.teacher.cityId;
+    this.teacherService.submit(this.teacher).subscribe(
+      (response: any) => {
+        this.toastr.success('Bravo');
+        this.router.navigate(['teachers']);
+        this.form.hide();
+      },
+      (response: any) => {
+        const firstError = response.error.errors;
+        const firstKey = Object.keys(firstError)[0];
+        this.errorMessage = firstError[firstKey][0];
+        this.form.hide();
+      });
+  }
+  getCities() {
+    this.cityService.getAll().subscribe(response => {
+      this.cities = response;
+    }
+    );
   }
 
 }

@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { GradeService } from '../grade.service';
+import { ToastrService } from 'ngx-toastr';
+import { FormService } from 'src/app/shared/form.service';
+import { StudentService } from 'src/app/student/student.service';
+import { CourseService } from 'src/app/course/course.service';
 
 @Component({
   selector: 'app-grade-form',
@@ -11,14 +15,27 @@ export class GradeFormComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private gradeService: GradeService
+    private gradeService: GradeService,
+    private router: Router,
+    private toastr: ToastrService,
+    private form: FormService,
+    private courseService: CourseService,
+    private studentService: StudentService
   ) { }
 
-  public grade : any = {};
+  public grade: any = {};
+  public courses: any = [];
+  public students: any = [];
+  public errorMessage = '';
+  public selectedCourseId: any = {};
+  public selectedStudentId: any = {};
+
 
   ngOnInit() {
     this.route.params.subscribe(params => {
-      const gradeId = params['id'];
+      const gradeId = params.id;
+      this.getCourses();
+      this.getStudents();
       if(gradeId != null) {
         this.getGrade(gradeId);
       }
@@ -30,8 +47,44 @@ export class GradeFormComponent implements OnInit {
         {
           this.grade = response;
           this.grade.id = gradeId;
+          this.selectedCourseId = this.grade.courseId;
+          this.selectedStudentId = this.grade.studentId;
+          this.form.hide();
         }
       );
   }
 
+  onSubmit() {
+    this.form.show();
+    this.selectedCourseId = this.grade.courseId;
+    this.selectedStudentId = this.grade.studentId;
+
+    this.gradeService.submit(this.grade).subscribe(
+      (response: any) => {
+        this.toastr.success('Bravo');
+        this.router.navigate(['grades']);
+        this.form.hide();
+      },
+      (response: any) => {
+        const firstError = response.error.errors;
+        const firstKey = Object.keys(firstError)[0];
+        this.errorMessage = firstError[firstKey][0];
+        this.form.hide();
+      });
+  }
+  getCourses() {
+    this.courseService.getAll().subscribe(response => {
+      this.courses = response;
+    }
+    );
+  }
+
+  getStudents() {
+    this.studentService.getAll().subscribe(response => {
+      this.students = response;
+    }
+    );
+  }
+
 }
+

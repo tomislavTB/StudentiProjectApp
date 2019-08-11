@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CollegeService } from '../college.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
+import { FormService } from 'src/app/shared/form.service';
 
 @Component({
   selector: 'app-college-list',
@@ -10,7 +11,7 @@ import { Router } from '@angular/router';
 })
 export class CollegeListComponent implements OnInit {
 
-  constructor(private collegeService: CollegeService, private toastr: ToastrService, private router: Router
+  constructor(private collegeService: CollegeService, private toastr: ToastrService, private router: Router, private form: FormService
     ) { }
 
     private colleges = [];
@@ -35,6 +36,7 @@ onAdd() {
 }
 
 onEdit(collegeId) {
+  this.form.show();
   this.router.navigate(['colleges', collegeId]);
 }
 }

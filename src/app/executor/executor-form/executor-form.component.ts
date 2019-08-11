@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ExecutorService } from '../executor.service';
+import { ToastrService } from 'ngx-toastr';
+import { FormService } from 'src/app/shared/form.service';
+import { TeacherService } from 'src/app/teacher/teacher.service';
+import { CourseService } from 'src/app/course/course.service';
 
 @Component({
   selector: 'app-executor-form',
@@ -11,14 +15,28 @@ export class ExecutorFormComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private executorService: ExecutorService
+    private executorService: ExecutorService,
+    private router: Router,
+    private toastr: ToastrService,
+    private form: FormService,
+    private teacherService: TeacherService,
+    private courseService: CourseService
   ) { }
 
-  public executor : any = {};
+  public executor: any = {};
+  public teachers: any = [];
+  public courses: any = [];
+  public errorMessage = '';
+  public selectedTeacherId: any = {};
+  public selectedCourseId: any = {};
+
+
 
   ngOnInit() {
     this.route.params.subscribe(params => {
-      const executorId = params['id'];
+      const executorId = params.id;
+      this.getTeachers();
+      this.getCourses();
       if(executorId != null) {
         this.getExecutor(executorId);
       }
@@ -30,8 +48,43 @@ export class ExecutorFormComponent implements OnInit {
         {
           this.executor = response;
           this.executor.id = executorId;
+          this.selectedTeacherId = this.executor.teacherId;
+          this.selectedCourseId = this.executor.courseId;
+          this.form.hide();
         }
       );
   }
 
+  onSubmit() {
+    this.form.show();
+    this.selectedTeacherId = this.executor.teacherId;
+    this.selectedCourseId = this.executor.courseId;
+    // this.city.countryId = 1;
+    this.executorService.submit(this.executor).subscribe(
+      (response: any) => {
+        this.toastr.success('Bravo');
+        this.router.navigate(['executors']);
+        this.form.hide();
+      },
+      (response: any) => {
+        const firstError = response.error.errors;
+        const firstKey = Object.keys(firstError)[0];
+        this.errorMessage = firstError[firstKey][0];
+        this.form.hide();
+      });
+  }
+  getTeachers() {
+    this.teacherService.getAll().subscribe(response => {
+      this.teachers = response;
+    }
+
+    );
+  }
+
+  getCourses() {
+    this.courseService.getAll().subscribe(response => {
+      this.courses = response;
+    }
+    );
+  }
 }

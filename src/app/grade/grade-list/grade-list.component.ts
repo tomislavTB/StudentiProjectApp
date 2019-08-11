@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { GradeService } from '../grade.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
+import { FormService } from 'src/app/shared/form.service';
 
 @Component({
   selector: 'app-grade-list',
@@ -10,7 +11,7 @@ import { Router } from '@angular/router';
 })
 export class GradeListComponent implements OnInit {
 
-  constructor(private gradeService: GradeService, private toastr: ToastrService, private router: Router
+  constructor(private gradeService: GradeService, private toastr: ToastrService, private router: Router, private form: FormService
     ) { }
 
     private grades = [];
@@ -34,6 +35,7 @@ onAdd() {
 }
 
 onEdit(gradeId) {
+  this.form.show();
   this.router.navigate(['grades', gradeId]);
 }
 }

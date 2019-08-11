@@ -1,8 +1,11 @@
-<div ng-app="myApp" ng-controller="formCtrl">
-  <form novalidate>
-    Ime Države:<br>
-    <input type="text" ng-model="country.name"><br>
-    <br><br>
-    <button ng-click="reset()">RESET</button>
-  </form>
+<div>
+  <div [hidden]="errorMessage.length == 0">{{ errorMessage }}</div>
+  <form (submit)="onSubmit()" #gameForm="ngForm">
+      <input title="id" name="id" type="hidden" [(ngModel)]="country.id" />
+<div class="form-group">
+  <label for="title">Država</label>
+  <input type="text" name="title" [(ngModel)]="country.name" class="form-control" id="title">
+</div>
+<button type="submit" class="btn btn-primary">Submit</button>
+</form>
 </div>

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CountryService } from '../country.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { FormService } from 'src/app/shared/form.service';
 
 @Component({
   selector: 'app-country-form',
@@ -11,10 +13,16 @@ export class CountryFormComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private countryService: CountryService
+    private countryService: CountryService,
+    private router: Router,
+    private toastr: ToastrService,
+    private form: FormService
   ) { }
 
   public country : any = {};
+  public errorMessage = '';
+  public selectedCountryId: any = {};
+
 
   ngOnInit() {
     this.route.params.subscribe(params => {
@@ -30,8 +38,28 @@ export class CountryFormComponent implements OnInit {
         {
           this.country = response;
           this.country.id = countryId;
+          this.form.hide();
         }
       );
   }
 
+  onSubmit() {
+    this.form.show();
+    // this.city.countryId = 1;
+    this.countryService.submit(this.country).subscribe(
+      (response: any) => {
+        this.toastr.success('Bravo');
+        this.router.navigate(['countries']);
+        this.form.hide();
+      },
+      (response: any) => {
+        const firstError = response.error.errors;
+        const firstKey = Object.keys(firstError)[0];
+        this.errorMessage = firstError[firstKey][0];
+        this.form.hide();
+      });
+  }
+
 }
+
+

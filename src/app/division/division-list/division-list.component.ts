@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DivisionService } from '../division.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
+import { FormService } from 'src/app/shared/form.service';
 
 @Component({
   selector: 'app-division-list',
@@ -10,7 +11,7 @@ import { Router } from '@angular/router';
 })
 export class DivisionListComponent implements OnInit {
 
-  constructor(private divisionService: DivisionService, private toastr: ToastrService, private router: Router
+  constructor(private divisionService: DivisionService, private toastr: ToastrService, private router: Router, private form: FormService
     ) { }
 
     private divisions = [];
@@ -36,6 +37,7 @@ onAdd() {
 }
 
 onEdit(divisionId) {
+  this.form.show();
   this.router.navigate(['divisions', divisionId]);
 }
 }

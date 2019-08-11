@@ -34,7 +34,7 @@ export class CityListComponent implements OnInit {
 
 onAdd() {
    this.router.navigate(['cities/new']);
-}
+} 
 
 onEdit(cityId) {
   this.form.show();

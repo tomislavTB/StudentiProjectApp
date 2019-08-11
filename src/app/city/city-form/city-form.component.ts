@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { CityService } from '../city.service';
 import { ToastrService } from 'ngx-toastr';
 import { FormService } from 'src/app/shared/form.service';
+import { CountryService } from 'src/app/country/country.service';
 
 @Component({
   selector: 'app-city-form',
@@ -16,15 +17,20 @@ export class CityFormComponent implements OnInit {
     private cityService: CityService,
     private router: Router,
     private toastr: ToastrService,
-    private form: FormService
+    private form: FormService,
+    private countryService: CountryService
   ) { }
 
   public city: any = {};
+  public countries: any = [];
   public errorMessage = '';
+  public selectedCountryId: any = {};
+
 
   ngOnInit() {
     this.route.params.subscribe(params => {
       const cityId = params.id;
+      this.getCountries();
       if(cityId != null) {
         this.getCity(cityId);
       }
@@ -36,13 +42,17 @@ export class CityFormComponent implements OnInit {
         {
           this.city = response;
           this.city.id = cityId;
+          this.selectedCountryId = this.city.countryId;
+          this.form.hide();
         }
       );
   }
 
-  onSubmit() {
-    this.form.show();
 
+  onSubmit() { 
+    this.form.show();
+    this.selectedCountryId = this.city.countryId;
+    // this.city.countryId = 1;
     this.cityService.submit(this.city).subscribe(
       (response: any) => {
         this.toastr.success('Bravo');
@@ -53,6 +63,15 @@ export class CityFormComponent implements OnInit {
         const firstError = response.error.errors;
         const firstKey = Object.keys(firstError)[0];
         this.errorMessage = firstError[firstKey][0];
+        this.form.hide();
       });
   }
+  getCountries() {
+    this.countryService.getAll().subscribe(response => {
+      this.countries = response;
+    }
+    );
+  }
+
 }
+

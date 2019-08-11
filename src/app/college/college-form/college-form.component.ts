@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CollegeService } from '../college.service';
+import { ToastrService } from 'ngx-toastr';
+import { FormService } from 'src/app/shared/form.service';
+import { CityService } from 'src/app/city/city.service';
 
 @Component({
   selector: 'app-college-form',
@@ -11,14 +14,22 @@ export class CollegeFormComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private collegeService: CollegeService
+    private collegeService: CollegeService,
+    private router: Router,
+    private toastr: ToastrService,
+    private form: FormService,
+    private cityService: CityService
   ) { }
 
   public college : any = {};
+  public errorMessage = '';
+  public selectedCityId: any = {};
+  public cities: any = {};
 
   ngOnInit() {
     this.route.params.subscribe(params => {
-      const collegeId = params['id'];
+      const collegeId = params.id;
+      this.getCities();
       if(collegeId != null) {
         this.getCollge(collegeId);
       }
@@ -30,8 +41,33 @@ export class CollegeFormComponent implements OnInit {
         {
           this.college = response;
           this.college.id = collegeId;
+          this.selectedCityId = this.college.cityId;
+          this.form.hide();
         }
       );
+  }
+
+  onSubmit() {
+    this.form.show();
+    this.selectedCityId = this.college.cityId;
+    this.collegeService.submit(this.college).subscribe(
+      (response: any) => {
+        this.toastr.success('Bravo');
+        this.router.navigate(['colleges']);
+        this.form.hide();
+      },
+      (response: any) => {
+        const firstError = response.error.errors;
+        const firstKey = Object.keys(firstError)[0];
+        this.errorMessage = firstError[firstKey][0];
+        this.form.hide();
+      });
+  }
+  getCities() {
+    this.cityService.getAll().subscribe(response => {
+      this.cities = response;
+    }
+    );
   }
 
 }

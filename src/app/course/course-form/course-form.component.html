@@ -1,10 +1,23 @@
-<div ng-app="myApp" ng-controller="formCtrl">
-  <form novalidate>
-    Naziv kolegija:<br>
-    <input type="text" ng-model="course.name"><br>
-    Opis:<br>
-    <input type="text" ng-model="corse.description">
-    <br><br>
-    <button ng-click="reset()">RESET</button>
-  </form>
+<div>
+  <div [hidden]="errorMessage.length == 0">{{ errorMessage }}</div>
+  <form (submit)="onSubmit()" #gameForm="ngForm">
+      <input title="id" name="id" type="hidden" [(ngModel)]="course.id" />
+<div class="form-group">
+  <label for="title">Smjer</label>
+  <input type="text" name="title" [(ngModel)]="course.name" class="form-control" id="title">
+</div>
+<div class="form-group">
+  <label for="description">Opis</label>
+  <input name="description" type="text" title="description" [(ngModel)]="course.description" class="form-control" id="description">
+</div>
+<div class="form-group">
+  <label for="divisionId">Izaberi smjer</label>
+  <select class="form-control" name="divisionId" [(ngModel)]="course.divisionId">
+    <option *ngFor="let division of divisions" [value]="division.id">
+      {{division.name}}
+    </option>
+  </select>
+</div>
+<button type="submit" class="btn btn-primary">Submit</button>
+</form>
 </div>

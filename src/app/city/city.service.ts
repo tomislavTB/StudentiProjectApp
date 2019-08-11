@@ -28,7 +28,7 @@ export class CityService {
   }
 
 
-  public deleteOne(cityId) {
+  public deleteOne(cityId) { 
     return this.http.delete(environment.apiUrl + this.CITIES_URL + '/' + cityId);
   }
 

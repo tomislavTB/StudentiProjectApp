@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CourseService } from '../course.service';
+import { ToastrService } from 'ngx-toastr';
+import { FormService } from 'src/app/shared/form.service';
+import { DivisionService } from 'src/app/division/division.service';
 
 @Component({
   selector: 'app-course-form',
@@ -11,14 +14,23 @@ export class CourseFormComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private courseService: CourseService
+    private courseService: CourseService,
+    private router: Router,
+    private toastr: ToastrService,
+    private form: FormService,
+    private divisionService: DivisionService
   ) { }
 
   public course : any = {};
+  public divisions: any = [];
+  public errorMessage = '';
+  public selectedDivisionId: any = {};
+
 
   ngOnInit() {
     this.route.params.subscribe(params => {
-      const courseId = params['id'];
+      const courseId = params.id;
+      this.getDivisions();
       if(courseId != null) {
         this.getCourse(courseId);
       }
@@ -30,8 +42,35 @@ export class CourseFormComponent implements OnInit {
         {
           this.course = response;
           this.course.id = courseId;
+          this.selectedDivisionId = this.course.divisionId;
+          this.form.hide();
         }
       );
   }
 
+  onSubmit() {
+    this.form.show();
+    this.selectedDivisionId = this.course.divisionId;
+    this.courseService.submit(this.course).subscribe(
+      (response: any) => {
+        this.toastr.success('Bravo');
+        this.router.navigate(['courses']);
+        this.form.hide();
+      },
+      (response: any) => {
+        const firstError = response.error.errors;
+        const firstKey = Object.keys(firstError)[0];
+        this.errorMessage = firstError[firstKey][0];
+        this.form.hide();
+      });
+  }
+  getDivisions() {
+    this.divisionService.getAll().subscribe(response => {
+      this.divisions = response;
+    }
+    );
+  }
+
 }
+
+

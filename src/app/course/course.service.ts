@@ -13,6 +13,15 @@ export class CourseService {
 
   private readonly COURS_URL = 'courses';
 
+  private getRootUrl() {
+    return environment.apiUrl + this.COURS_URL;
+  }
+
+  private formatUrl(courseId){
+    return this.getRootUrl() + '/' + courseId;
+  }
+
+
   public getAll() {
     return this.http.get(environment.apiUrl + this.COURS_URL);
   }
@@ -24,6 +33,21 @@ export class CourseService {
 
   public getOne(courseId) {
     return this.http.get(environment.apiUrl + this.COURS_URL + '/' + courseId);
+  }
+  public addOne(course) {
+    return this.http.post(this.getRootUrl(), course);
+  }
+
+  public putOne(courseId, course) {
+    return this.http.put(this.formatUrl(courseId), course);
+  }
+
+
+  public submit(course) {
+     if(!course.id) {
+      return this.addOne(course);
+    }
+      return this.putOne(course.id, course);
   }
 }
 

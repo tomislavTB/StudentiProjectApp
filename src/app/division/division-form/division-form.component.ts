@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { DivisionService } from '../division.service';
+import { ToastrService } from 'ngx-toastr';
+import { FormService } from 'src/app/shared/form.service';
+import { CollegeService } from 'src/app/college/college.service';
 
 @Component({
   selector: 'app-division-form',
@@ -11,14 +14,22 @@ export class DivisionFormComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private divisionService: DivisionService
+    private divisionService: DivisionService,
+    private router: Router,
+    private toastr: ToastrService,
+    private form: FormService,
+    private collegeService: CollegeService
   ) { }
 
   public division : any = {};
+  public colleges: any = [];
+  public errorMessage = '';
+  public selectedCollegeId: any = {};
 
   ngOnInit() {
     this.route.params.subscribe(params => {
-      const divisionId = params['id'];
+      const divisionId = params.id;
+      this.getColleges();
       if(divisionId != null) {
         this.getDivision(divisionId);
       }
@@ -30,8 +41,34 @@ export class DivisionFormComponent implements OnInit {
         {
           this.division = response;
           this.division.id = divisionId;
+          this.selectedCollegeId = this.division.collegeId;
+          this.form.hide();
         }
       );
+  }
+
+  onSubmit() {
+    this.form.show();
+    this.selectedCollegeId = this.division.collegeId;
+    // this.city.countryId = 1;
+    this.divisionService.submit(this.division).subscribe(
+      (response: any) => {
+        this.toastr.success('Bravo');
+        this.router.navigate(['divisions']);
+        this.form.hide();
+      },
+      (response: any) => {
+        const firstError = response.error.errors;
+        const firstKey = Object.keys(firstError)[0];
+        this.errorMessage = firstError[firstKey][0];
+        this.form.hide();
+      });
+  }
+  getColleges() {
+    this.collegeService.getAll().subscribe(response => {
+      this.colleges = response;
+    }
+    );
   }
 
 }

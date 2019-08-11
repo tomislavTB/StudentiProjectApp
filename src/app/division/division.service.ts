@@ -13,6 +13,15 @@ export class DivisionService {
 
   private readonly DIVISION_URL = 'divisions';
 
+  private getRootUrl() {
+    return environment.apiUrl + this.DIVISION_URL;
+  }
+
+  private formatUrl(divisionId){
+    return this.getRootUrl() + '/' + divisionId;
+  }
+
+
   public getAll() {
     return this.http.get(environment.apiUrl + this.DIVISION_URL);
   }
@@ -24,5 +33,20 @@ export class DivisionService {
 
   public getOne(divisionId) {
     return this.http.get(environment.apiUrl + this.DIVISION_URL + '/' + divisionId);
+  }
+  public addOne(division) {
+    return this.http.post(this.getRootUrl(), division);
+  }
+
+  public putOne(divisionId, division) {
+    return this.http.put(this.formatUrl(divisionId), division);
+  }
+
+
+  public submit(division) {
+     if(!division.id) {
+      return this.addOne(division);
+    }
+      return this.putOne(division.id, division);
   }
 }

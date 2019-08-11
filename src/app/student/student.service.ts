@@ -13,6 +13,14 @@ export class StudentService {
 
   private readonly STUDENT_URL = 'students';
 
+  private getRootUrl() {
+    return environment.apiUrl + this.STUDENT_URL;
+  }
+
+  private formatUrl(studnetId){
+    return this.getRootUrl() + '/' + studnetId;
+  }
+
   public getAll() {
     return this.http.get(environment.apiUrl + this.STUDENT_URL);
   }
@@ -26,4 +34,20 @@ export class StudentService {
   public getOne(studentId) {
     return this.http.get(environment.apiUrl + this.STUDENT_URL + '/' + studentId);
   }
+  public addOne(student) {
+    return this.http.post(this.getRootUrl(), student);
+  }
+
+  public putOne(studentId, student) {
+    return this.http.put(this.formatUrl(studentId), student);
+  }
+
+
+  public submit(student) {
+     if(!student.id) {
+      return this.addOne(student);
+    }
+      return this.putOne(student.id, student);
+  }
 }
+
