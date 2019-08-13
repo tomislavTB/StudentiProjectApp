@@ -1,5 +1,4 @@
 <div>
-  <div class="mb-5"><h2>Kolegij</h2><strong>uređivanje/dodavanje</strong></div>
   <div [hidden]="errorMessage.length == 0">{{ errorMessage }}</div>
   <form (submit)="onSubmit()" #gameForm="ngForm">
       <input title="id" name="id" type="hidden" [(ngModel)]="course.id" />

@@ -24,7 +24,7 @@ export class TeacherFormComponent implements OnInit {
   public teacher: any = {};
   public errorMessage = '';
   public selectedCityId: any = {};
-  public cities: any = {};
+  public cities: any = [];
 
   ngOnInit() {
     this.route.params.subscribe(params => {

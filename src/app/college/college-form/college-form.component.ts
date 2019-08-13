@@ -24,7 +24,7 @@ export class CollegeFormComponent implements OnInit {
   public college : any = {};
   public errorMessage = '';
   public selectedCityId: any = {};
-  public cities: any = {};
+  public cities: any = [];
 
   ngOnInit() {
     this.route.params.subscribe(params => {

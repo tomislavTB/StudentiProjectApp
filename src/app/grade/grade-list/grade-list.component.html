@@ -1,15 +1,16 @@
 
 <div>
+    <div class="mb-3"><h2>Ocjena</h2><strong>uređivanje/dodavanje</strong></div>
   <div class="row">
       <div class="col-sm-12 mb-3">
-          <button class="btn add btn-primary" (click)="onAdd()">
+          <button class="btn add btn-secondary float-right" (click)="onAdd()">
               <i class="fa fa-plus"></i>
           </button>
       </div>
   </div>
 <div>
   <table class="table table-striped table-hover">
-      <thead>
+      <thead class="thead-dark">
           <tr>
               <th scope="col">Vrijeme Ispita</th>
               <th scope="col">Ocjena</th>
@@ -28,12 +29,11 @@
               <td>{{ grade.student.lastName}}</td>
               <td>{{ grade.course.name}}</td>
 
-              <td>
-                <button class="btn"><i class="fa fa-edit" (click)="onEdit(grade.id)"></i></button>
-            </td>
-            <td>
-                <button class="btn delete" (click)="onDelete(grade.id)"><i class="fa fa-trash"></i></button>
-            </td>
+              <td class="action">
+                  <button class="btn btn-sm"><i class="fa fa-edit" (click)="onEdit(grade.id)"></i></button>
+                  <button class="btn delete btn-sm btn-danger ml-3" (click)="onDelete(grade.id)"><i class="fa fa-trash"></i></button>
+              </td>
+
 
 
 

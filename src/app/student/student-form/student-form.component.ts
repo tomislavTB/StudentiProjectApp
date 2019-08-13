@@ -26,8 +26,8 @@ export class StudentFormComponent implements OnInit {
   public student: any = {};
   public errorMessage = '';
   public selectedCityId: any = {};
-  public cities: any = {};
-  public divisions: any = {};
+  public cities: any = [];
+  public divisions: any = [];
   public selectedDivisionId: any = {};
 
 
