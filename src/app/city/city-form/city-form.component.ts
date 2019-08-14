@@ -4,6 +4,7 @@ import { CityService } from '../city.service';
 import { ToastrService } from 'ngx-toastr';
 import { FormService } from 'src/app/shared/form.service';
 import { CountryService } from 'src/app/country/country.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-city-form',
@@ -18,7 +19,8 @@ export class CityFormComponent implements OnInit {
     private router: Router,
     private toastr: ToastrService,
     private form: FormService,
-    private countryService: CountryService
+    private countryService: CountryService,
+    private location: Location
   ) { }
 
   public city: any = {};
@@ -49,7 +51,7 @@ export class CityFormComponent implements OnInit {
   }
 
 
-  onSubmit() { 
+  onSubmit() {
     this.form.show();
     this.selectedCountryId = this.city.countryId;
     // this.city.countryId = 1;
@@ -65,6 +67,9 @@ export class CityFormComponent implements OnInit {
         this.errorMessage = firstError[firstKey][0];
         this.form.hide();
       });
+  }
+  goBack() {
+    this.location.back();
   }
   getCountries() {
     this.countryService.getAll().subscribe(response => {

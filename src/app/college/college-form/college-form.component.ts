@@ -31,12 +31,12 @@ export class CollegeFormComponent implements OnInit {
       const collegeId = params.id;
       this.getCities();
       if(collegeId != null) {
-        this.getCollge(collegeId);
+        this.getCollege(collegeId);
       }
     });
   }
 
-  getCollge(collegeId) {
+  getCollege(collegeId) {
       this.collegeService.getOne(collegeId).subscribe(response =>
         {
           this.college = response;

@@ -86,14 +86,18 @@
   padding: 10px 5px;
   font-size: 17px;
   cursor: pointer;
+
+}
+a {
+  color: white !important;
 }
 a:hover {
   color:rgb(209, 212, 34);
 }
 
 .navbar-brand {
-  font-family: 'elephant', serif;
-  color: #330be6  !important;
+  font-weight: bold;
+  color: white  !important;
   font-size: 25px;
   margin: 0px;
 }

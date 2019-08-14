@@ -16,10 +16,12 @@
           Info
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item">Action</a>
-          <a class="dropdown-item">Another action</a>
+          <a class="dropdown-item">Emali: tomislav4800@gmail.com</a>
+          <a class="dropdown-item">Adresa: Velika Ulica 15 </a>
+          <a class="dropdown-item">Tel: 621555 </a>
+          <a class="dropdown-item">Mob: 095555111 </a>
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item">Something else here</a>
+          <a class="dropdown-item">Radno vrijeme: Pet-Sub</a>
         </div>
       </li>
     </ul>
@@ -29,17 +31,19 @@
 
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item">
-        <a [routerLink]="['/cities']" class="fas fa-city">
+    <ul class="navbar-nav mr-auto font-weight-bold">
+      <li class="nav-item text-center">
+        <a [routerLink]="['/cities']">
+          <i class="fas fa-city"></i>
           Gradovi
         </a>
       </li>
-      <li class="nav-item">
-        <a [routerLink]="['/colleges']" class="fas fa-university">
-          Fakulteti
-        </a>
-      </li>
+      <li class="nav-item text-center">
+          <a [routerLink]="['/colleges']">
+            <i class="fas fa-university"></i>
+            Fakulteti
+          </a>
+        </li>
       <li class="nav-item">
         <a [routerLink]="['/countries']" class="fas fa-globe">
           Države
@@ -111,19 +115,19 @@
 <div class="container">
   <router-outlet></router-outlet>
 </div>
+<footer style="margin: 30px 0;">
+  </footer>
 
 
 
 <section>
   <header>
   </header>
-  <main class="container mt-3">
+  <main class="container mt-3" style="min-height: 100vh;">
     <div id="loading" class="hidden">
       <img [src]="'assets/loading.gif'" alt="loading">
     </div>
     <router-outlet></router-outlet>
   </main>
-  <footer>
-  </footer>
 </section>
 

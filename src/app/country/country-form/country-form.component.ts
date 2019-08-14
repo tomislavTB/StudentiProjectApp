@@ -19,7 +19,7 @@ export class CountryFormComponent implements OnInit {
     private form: FormService
   ) { }
 
-  public country : any = {};
+  public country: any = {};
   public errorMessage = '';
   public selectedCountryId: any = {};
 
