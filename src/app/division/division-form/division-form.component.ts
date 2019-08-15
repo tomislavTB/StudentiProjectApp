@@ -4,6 +4,7 @@ import { DivisionService } from '../division.service';
 import { ToastrService } from 'ngx-toastr';
 import { FormService } from 'src/app/shared/form.service';
 import { CollegeService } from 'src/app/college/college.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-division-form',
@@ -18,7 +19,8 @@ export class DivisionFormComponent implements OnInit {
     private router: Router,
     private toastr: ToastrService,
     private form: FormService,
-    private collegeService: CollegeService
+    private collegeService: CollegeService,
+    private location: Location
   ) { }
 
   public division : any = {};
@@ -63,6 +65,10 @@ export class DivisionFormComponent implements OnInit {
         this.errorMessage = firstError[firstKey][0];
         this.form.hide();
       });
+  }
+
+  goBack() {
+    this.location.back();
   }
   getColleges() {
     this.collegeService.getAll().subscribe(response => {

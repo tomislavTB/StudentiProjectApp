@@ -5,6 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 import { FormService } from 'src/app/shared/form.service';
 import { StudentService } from 'src/app/student/student.service';
 import { CourseService } from 'src/app/course/course.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-grade-form',
@@ -20,7 +21,8 @@ export class GradeFormComponent implements OnInit {
     private toastr: ToastrService,
     private form: FormService,
     private courseService: CourseService,
-    private studentService: StudentService
+    private studentService: StudentService,
+    private location: Location
   ) { }
 
   public grade: any = {};
@@ -77,6 +79,10 @@ export class GradeFormComponent implements OnInit {
       this.courses = response;
     }
     );
+  }
+
+  goBack() {
+    this.location.back();
   }
 
   getStudents() {

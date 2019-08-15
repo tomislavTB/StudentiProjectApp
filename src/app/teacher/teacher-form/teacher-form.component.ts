@@ -4,6 +4,7 @@ import { ToastrService } from 'ngx-toastr';
 import { FormService } from 'src/app/shared/form.service';
 import { CityService } from 'src/app/city/city.service';
 import { TeacherService } from '../teacher.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-teacher-form',
@@ -18,7 +19,8 @@ export class TeacherFormComponent implements OnInit {
     private router: Router,
     private toastr: ToastrService,
     private form: FormService,
-    private cityService: CityService
+    private cityService: CityService,
+    private location: Location
   ) { }
 
   public teacher: any = {};
@@ -62,6 +64,10 @@ export class TeacherFormComponent implements OnInit {
         this.errorMessage = firstError[firstKey][0];
         this.form.hide();
       });
+  }
+
+  goBack() {
+    this.location.back();
   }
   getCities() {
     this.cityService.getAll().subscribe(response => {

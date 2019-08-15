@@ -3,6 +3,7 @@ import { CountryService } from '../country.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { FormService } from 'src/app/shared/form.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-country-form',
@@ -16,7 +17,8 @@ export class CountryFormComponent implements OnInit {
     private countryService: CountryService,
     private router: Router,
     private toastr: ToastrService,
-    private form: FormService
+    private form: FormService,
+    private location: Location
   ) { }
 
   public country: any = {};
@@ -41,6 +43,10 @@ export class CountryFormComponent implements OnInit {
           this.form.hide();
         }
       );
+  }
+
+  goBack() {
+    this.location.back();
   }
 
   onSubmit() {

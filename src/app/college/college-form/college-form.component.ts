@@ -4,6 +4,7 @@ import { CollegeService } from '../college.service';
 import { ToastrService } from 'ngx-toastr';
 import { FormService } from 'src/app/shared/form.service';
 import { CityService } from 'src/app/city/city.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-college-form',
@@ -18,7 +19,8 @@ export class CollegeFormComponent implements OnInit {
     private router: Router,
     private toastr: ToastrService,
     private form: FormService,
-    private cityService: CityService
+    private cityService: CityService,
+    private location: Location
   ) { }
 
   public college : any = {};
@@ -63,6 +65,11 @@ export class CollegeFormComponent implements OnInit {
         this.form.hide();
       });
   }
+
+  goBack() {
+    this.location.back();
+  }
+
   getCities() {
     this.cityService.getAll().subscribe(response => {
       this.cities = response;

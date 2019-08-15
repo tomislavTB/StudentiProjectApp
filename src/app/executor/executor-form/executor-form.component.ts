@@ -5,6 +5,8 @@ import { ToastrService } from 'ngx-toastr';
 import { FormService } from 'src/app/shared/form.service';
 import { TeacherService } from 'src/app/teacher/teacher.service';
 import { CourseService } from 'src/app/course/course.service';
+import { Location } from '@angular/common';
+
 
 @Component({
   selector: 'app-executor-form',
@@ -20,7 +22,8 @@ export class ExecutorFormComponent implements OnInit {
     private toastr: ToastrService,
     private form: FormService,
     private teacherService: TeacherService,
-    private courseService: CourseService
+    private courseService: CourseService,
+    private location: Location
   ) { }
 
   public executor: any = {};
@@ -72,6 +75,7 @@ export class ExecutorFormComponent implements OnInit {
         this.errorMessage = firstError[firstKey][0];
         this.form.hide();
       });
+
   }
   getTeachers() {
     this.teacherService.getAll().subscribe(response => {
@@ -79,6 +83,10 @@ export class ExecutorFormComponent implements OnInit {
     }
 
     );
+  }
+
+  goBack() {
+    this.location.back();
   }
 
   getCourses() {
